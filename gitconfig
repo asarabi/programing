@@ -6,10 +6,23 @@
 	  ci = commit
 	  st = status
 	  br = branch
-	hist = log --pretty=format:'%C(yellow)[%ad]%C(reset) %C(green)[%h]%C(reset) | %C(red)%s %C(bold red){{%an}}%C(reset) %C(blue)%d%C(reset)' --graph --date=short
+	  hist = log --pretty=format:'%C(yellow)[%ad]%C(reset) %C(green)[%h]%C(reset) | %C(red)%s %C(bold red){{%an}}%C(reset) %C(blue)%d%C(reset)' --graph --date=short --decorate
+	  ahist = log --pretty=format:'%C(yellow)[%ad]%C(reset) %C(green)[%h]%C(reset) | %C(red)%s %C(bold red){{%an}}%C(reset) %C(blue)%d%C(reset)' --graph --date=short --all --decorate
 	  type = cat-file -t
 	  dump = cat-file -p
 	unstage = reset HEAD --
+	diff = diff --binary
+	cdiff = diff --cached
+	fp = foramt-patch
+
+[color]
+	ui = true
+
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan reverse
+	branch = green
 	
 [core]
 	editor = vim
