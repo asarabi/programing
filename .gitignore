@@ -6,3 +6,6 @@
 *.exe
 *.o
 *.so
+*.a
+*.out
+*.swp
