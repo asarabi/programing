@@ -1,0 +1,12 @@
+#!/bin/sh
+
+echo '1 make  tag list'
+find -type f -regex '.*\.\(c\|cpp\|java\|h\s|\S\)' > tag.list
+
+echo '2 make  ctag list'
+ctags -L tag.list
+
+echo '3 make  cscope list'
+cscope -b -i tag.list
+
+rm tag.list

@@ -4,6 +4,7 @@ set smartindent
 set tabstop=4
 set shiftwidth=4
 set colorcolumn=81
+set autowrite
 "set mouse=a
 "=== VIEW ===
 set visualbell
@@ -16,7 +17,6 @@ set linebreak
 set showmatch
 set background=dark
 set guifont=NanumGothicCoding:h12:cHANGEUL
-
 "=== SEARCH ===
 set nowrapscan
 set hlsearch
@@ -29,6 +29,16 @@ set history=1000
 set fencs=ucs-bom,utf-8,euc-kr,latin1
 set fileencoding=utf-8
 set nobackup
+
+"=== Whitespace ===
+autocmd BufWritePre * StripWhitespace
+
+
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+
+autocmd FileType c,cpp,java,php,javascript autocmd BufWritePre <buffer> :%s/\s\+$//e
+
 
 "<=== VUNDLE config Start ===>
 set nocompatible
@@ -46,12 +56,14 @@ Plugin 'Shougo/unite.vim'
 Plugin 'bling/vim-airline'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'tomasr/molokai'
-Plugin 'Tagbar' 
+Plugin 'Tagbar'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'ntpeters/vim-better-whitespace'
 nmap <F5> :NERDTreeToggle<CR>
 nmap <F6> :Tagbar<CR>
-nmap <F9> :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <F7> :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <F8> :cs find g <C-R>=expand("<cword>")<CR><CR>
 
 call vundle#end()
 filetype plugin indent on
@@ -65,7 +77,9 @@ syntax on
 syntax enable
 "colorscheme candycode
 "colorscheme molokai
-colorscheme solarized
+"colorscheme solarized
+colorscheme jellybeans
+
 "ctags
 set tags=./tags
 "cscpoe
@@ -75,7 +89,5 @@ set cst
 set nocsverb
 if filereadable("./cscope.out")
     cs add cscope.out
-else
-    cs add /usr/src/linux/cscope.out
 endif
 set csverb
