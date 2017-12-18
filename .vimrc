@@ -5,7 +5,7 @@ set tabstop=4
 set shiftwidth=4
 set colorcolumn=81
 set autowrite
-"set mouse=a
+set mouse=a
 "=== VIEW ===
 set visualbell
 set number
@@ -38,7 +38,10 @@ highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
 autocmd FileType c,cpp,java,php,javascript autocmd BufWritePre <buffer> :%s/\s\+$//e
-
+autocmd BufReadPost *
+    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+    \ exe "normal! g`\"" |
+    \ endif
 
 "<=== VUNDLE config Start ===>
 set nocompatible
@@ -60,6 +63,13 @@ Plugin 'Tagbar'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'ntpeters/vim-better-whitespace'
+
+
+nmap <c-h> <c-w>h
+nmap <c-j> <c-w>j
+nmap <c-k> <c-w>k
+nmap <c-l> <c-w>l
+
 nmap <F5> :NERDTreeToggle<CR>
 nmap <F6> :Tagbar<CR>
 nmap <F7> :cs find s <C-R>=expand("<cword>")<CR><CR>
